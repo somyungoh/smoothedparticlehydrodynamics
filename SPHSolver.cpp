@@ -23,7 +23,7 @@
 
 
 //***************************************//
-//				Constructors			 //
+//		Constructors		 //
 //***************************************//
 
 SPHSolver::SPHSolver() {};
@@ -32,28 +32,15 @@ SPHSolver::SPHSolver(const vec2 &LLC, const vec2 &URC, int initial_num_particles
 	SOLVER_MODE = LEAPFROG;	// initial solver mode
 
 	// initialize parameters
-	gravity = vec2(0, -9.81); // gravity
-	d0 = 200;				// initial density
-	g = 3;					// tait exp. factor (gamma)
-	a = 6.0;				// viscosity constant
-	e = 0.05;				// viscosity epsilon
-	B = 0.0009;				// pressure constant
-	h = 0.015;				// radius
-	m = 0.1;				// mass
-	wall_sticky = 0.5;  // wall stickiness for boundary condition
-
-
-	// these working good!
-
-	//gravity = vec2(0, -9.81); // gravity
-	//d0 = 25;				// initial density
-	//g = 3;					// tait exp. factor (gamma)
-	//a = 6.0;				// viscosity constant
-	//e = 0.15;				// viscosity epsilon
-	//B = 0.05;				// pressure constant
-	//h = 0.15;				// radius
-	//m = 0.1;				// mass
-	//wall_sticky = 0.5;  // wall stickiness for boundary condition
+	gravity = vec2(0, -9.81);// gravity
+	d0 = 200;		 // initial density
+	g = 3;			 // tait exp. factor (gamma)
+	a = 6.0;		 // viscosity constant
+	e = 0.05;		 // viscosity epsilon
+	B = 0.0009;		 // pressure constant
+	h = 0.015;		 // radius
+	m = 0.1;		 // mass
+	wall_sticky = 0.5;  	 // wall stickiness for boundary condition
 
 	Nx = (int)((URC.x - LLC.x) / h + 1);
 	Ny = (int)((URC.y - LLC.y) / h + 1);
@@ -78,31 +65,31 @@ void SPHSolver::apply_change() {
 };
 
 // getters and setters
-int	  SPHSolver::getSolverMode()	const { return SOLVER_MODE; };
-int   SPHSolver::getParticleNum()	const { return TOTAL_PARTICLE; };
-vec2  SPHSolver::getGravity()		const { return gravity; };
-float SPHSolver::getD0()			const { return d0; };
-float SPHSolver::getG()				const { return g; };
-float SPHSolver::getA()				const { return a; };
-float SPHSolver::getB()				const { return B; };
-float SPHSolver::getE()				const { return e; };
-float SPHSolver::getH()				const { return h; };
-float SPHSolver::getMass()			const { return m; };
-float SPHSolver::getWS()			const { return wall_sticky; };
-void  SPHSolver::setSolverMode(int MODE) { SOLVER_MODE = MODE; }
-void  SPHSolver::setGravity(const vec2 &g) { gravity = g; };
-void  SPHSolver::setD0(float _d0)		  { d0 = _d0; };
-void  SPHSolver::setG(float _g)			  { g = _g; };
-void  SPHSolver::setA(float _a)			  { a = _a; };
-void  SPHSolver::setB(float _B)			  { B = _B; };
-void  SPHSolver::setE(float _e)			  { e = _e; };
-void  SPHSolver::setH(float _h)			  { h = _h; };
-void  SPHSolver::setMass(float _m)		  { m = _m; };
-void  SPHSolver::setWS(float ws)		  { wall_sticky = ws; };
+int	  SPHSolver::getSolverMode()	const 	{ return SOLVER_MODE; };
+int   SPHSolver::getParticleNum()	const 	{ return TOTAL_PARTICLE; };
+vec2  SPHSolver::getGravity()		const 	{ return gravity; };
+float SPHSolver::getD0()		const 	{ return d0; };
+float SPHSolver::getG()			const 	{ return g; };
+float SPHSolver::getA()			const 	{ return a; };
+float SPHSolver::getB()			const 	{ return B; };
+float SPHSolver::getE()			const 	{ return e; };
+float SPHSolver::getH()			const 	{ return h; };
+float SPHSolver::getMass()		const 	{ return m; };
+float SPHSolver::getWS()		const 	{ return wall_sticky; };
+void  SPHSolver::setSolverMode(int MODE) 	{ SOLVER_MODE = MODE; }
+void  SPHSolver::setGravity(const vec2 &g) 	{ gravity = g; };
+void  SPHSolver::setD0(float _d0)		{ d0 = _d0; };
+void  SPHSolver::setG(float _g)			{ g = _g; };
+void  SPHSolver::setA(float _a)			{ a = _a; };
+void  SPHSolver::setB(float _B)			{ B = _B; };
+void  SPHSolver::setE(float _e)			{ e = _e; };
+void  SPHSolver::setH(float _h)			{ h = _h; };
+void  SPHSolver::setMass(float _m)		{ m = _m; };
+void  SPHSolver::setWS(float ws)		{ wall_sticky = ws; };
 
 
 //***************************************//
-//			simulation methods			 //
+//	simulation methods		 //
 //***************************************//
 
 
@@ -203,14 +190,14 @@ void SPHSolver::update_momentum() {
 		for (int j = 0; j < neighbors.size(); j++) {
 
 			int index = neighbors[j];
-			if (i == index) continue;		// ignore same index
+			if (i == index) continue;	// ignore same index
 
 			// 1. compute force
 			float S_force = compute_force(particles[i], particles[index]);
 			// 2. compute gradient weight
 			vec2 grad = compute_gradientWeight(particles[i].getPosition(), particles[index].getPosition(), particles[i].getRadius());		// gradient
 
-			new_acceleration += particles[index].getMass() * S_force * grad;		// final gathering
+			new_acceleration += particles[index].getMass() * S_force * grad;	// final gathering
 
 		}
 		particles[i].setAcceleration(-1.f * new_acceleration + gravity);
@@ -296,9 +283,9 @@ void SPHSolver::update_occupancy() {
 		int iy = (int)(p.y / dy);
 		int index = ix + iy * Nx;
 
-		if (index < 0 || index >= occupancy_volume.size()) continue;		// index over bound
+		if (index < 0 || index >= occupancy_volume.size()) continue;	// index over bound
 
-		occupancy_volume[index].push_back(i);		// add this particle index
+		occupancy_volume[index].push_back(i);	// add this particle index
 	}
 };
 
@@ -306,7 +293,7 @@ void SPHSolver::update_occupancy() {
 
 
 //***************************************//
-//				helper methods			 //
+//		helper methods		 //
 //***************************************//
 
 
@@ -435,7 +422,7 @@ float SPHSolver::compute_weight(const vec2 &p1, const vec2 &p2, float radius) {
 	rh = r / radius;
 
 	if (rh < 1) w = pow(1 - rh, 3) * 10.f / (PI * pow(radius, 3)); 	// distance is less than radius
-	else		w = 0;
+	else	    w = 0;
 
 	return w;
 };
@@ -450,7 +437,7 @@ vec2 SPHSolver::compute_gradientWeight(const vec2 &p1, const vec2 &p2, float rad
 
 	if (abs(r_len) < 1e-10) grad_w = vec2(0, 0);
 	if (r_len / radius < 1) grad_w = (float)(- 1.f * pow(1 - r_len / radius, 2) * 30 / (PI * pow(radius, 3))) * (r_dir / r_len);
-	else					grad_w = vec2(0, 0);
+	else			grad_w = vec2(0, 0);
 
 	return grad_w;
 };
