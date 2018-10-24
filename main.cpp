@@ -71,7 +71,7 @@ GLUI_StaticText *txt_blank, *txt_d0, *txt_a, *txt_g, *txt_B, *txt_e, *txt_ws, *t
 GLUI_Button	*button_apply, *button_run, *button_reset, *button_capture;
 
 #define ID_PANEL_PARAMETER	100
-#define ID_RADIO_SOLVER		101
+#define ID_RADIO_SOLVE		101
 #define ID_BUTTON_APPLY		200
 #define ID_BUTTON_RUN		201
 #define ID_BUTTON_RESET		202
