@@ -12,31 +12,31 @@ Particle::Particle() {}
 Particle::Particle(int id, const vec2 &pos, float radius, float mass) : id(id), position(pos), radius(radius), mass(mass) {
 
 	// init. attributes
-	velocity	 = vec2(0,0);
-	acceleration = vec2(0,0);
-	density		 = 0;
-	pressure	 = 0;
-	using_defaultColor = true;
+	velocity	 	= vec2(0,0);
+	acceleration 		= vec2(0,0);
+	density		 	= 0;
+	pressure	 	= 0;
+	using_defaultColor 	= true;
 
 }
 Particle::~Particle() {}
  
 // getter & setters
-int	  Particle::getID()				const { return id; };
-vec2  Particle::getPosition()		const { return position; };
-vec2  Particle::getVelocity()		const { return velocity; };
-vec2  Particle::getAcceleration()	const { return acceleration; };
-float Particle::getRadius()			const { return radius; };
-float Particle::getMass()			const { return mass; };
-float Particle::getDensity()		const { return density; };
-float Particle::getPressure()		const { return pressure; };
-void  Particle::setPosition(const vec2 &p)		{ position = p; };
-void  Particle::setVelocity(const vec2 &v)		{ velocity = v; };
+int	  Particle::getID()		const 	{ return id; };
+vec2  Particle::getPosition()		const 	{ return position; };
+vec2  Particle::getVelocity()		const 	{ return velocity; };
+vec2  Particle::getAcceleration()	const 	{ return acceleration; };
+float Particle::getRadius()		const 	{ return radius; };
+float Particle::getMass()		const 	{ return mass; };
+float Particle::getDensity()		const 	{ return density; };
+float Particle::getPressure()		const 	{ return pressure; };
+void  Particle::setPosition(const vec2 &p)	{ position = p; };
+void  Particle::setVelocity(const vec2 &v)	{ velocity = v; };
 void  Particle::setAcceleration(const vec2 &a)	{ acceleration = a; };
-void  Particle::setRadius(float r)				{ radius = r; };
-void  Particle::setMass(float m)				{ mass = m; };
-void  Particle::setDensity(float d)				{ density = d; };
-void  Particle::setPressure(float p)			{ pressure = p; };
+void  Particle::setRadius(float r)		{ radius = r; };
+void  Particle::setMass(float m)		{ mass = m; };
+void  Particle::setDensity(float d)		{ density = d; };
+void  Particle::setPressure(float p)		{ pressure = p; };
 void  Particle::setColor(const vec3 &_color)	{ color = _color; using_defaultColor = false; }
 
 // display function
