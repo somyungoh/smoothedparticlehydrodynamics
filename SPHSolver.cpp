@@ -65,19 +65,19 @@ void SPHSolver::apply_change() {
 };
 
 // getters and setters
-int	  SPHSolver::getSolverMode()	const 	{ return SOLVER_MODE; };
-int   SPHSolver::getParticleNum()	const 	{ return TOTAL_PARTICLE; };
-vec2  SPHSolver::getGravity()		const 	{ return gravity; };
-float SPHSolver::getD0()		const 	{ return d0; };
-float SPHSolver::getG()			const 	{ return g; };
-float SPHSolver::getA()			const 	{ return a; };
-float SPHSolver::getB()			const 	{ return B; };
-float SPHSolver::getE()			const 	{ return e; };
-float SPHSolver::getH()			const 	{ return h; };
-float SPHSolver::getMass()		const 	{ return m; };
-float SPHSolver::getWS()		const 	{ return wall_sticky; };
-void  SPHSolver::setSolverMode(int MODE) 	{ SOLVER_MODE = MODE; }
-void  SPHSolver::setGravity(const vec2 &g) 	{ gravity = g; };
+int	  SPHSolver::getSolverMode()	const	{ return SOLVER_MODE; };
+int   SPHSolver::getParticleNum()	const	{ return TOTAL_PARTICLE; };
+vec2  SPHSolver::getGravity()		const	{ return gravity; };
+float SPHSolver::getD0()		const	{ return d0; };
+float SPHSolver::getG()			const	{ return g; };
+float SPHSolver::getA()			const	{ return a; };
+float SPHSolver::getB()			const	{ return B; };
+float SPHSolver::getE()			const	{ return e; };
+float SPHSolver::getH()			const	{ return h; };
+float SPHSolver::getMass()		const	{ return m; };
+float SPHSolver::getWS()		const	{ return wall_sticky; };
+void  SPHSolver::setSolverMode(int MODE)	{ SOLVER_MODE = MODE; }
+void  SPHSolver::setGravity(const vec2 &g)	{ gravity = g; };
 void  SPHSolver::setD0(float _d0)		{ d0 = _d0; };
 void  SPHSolver::setG(float _g)			{ g = _g; };
 void  SPHSolver::setA(float _a)			{ a = _a; };
@@ -86,6 +86,7 @@ void  SPHSolver::setE(float _e)			{ e = _e; };
 void  SPHSolver::setH(float _h)			{ h = _h; };
 void  SPHSolver::setMass(float _m)		{ m = _m; };
 void  SPHSolver::setWS(float ws)		{ wall_sticky = ws; };
+
 
 
 //***************************************//
