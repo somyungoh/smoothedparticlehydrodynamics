@@ -22,8 +22,8 @@ public:
 	void apply_change();
 
 	// getters and setters
-	int   getSolverMode() const;
-	int   getParticleNum() const;
+	int   getSolverMode()	const;
+	int   getParticleNum()  const;
 	vec2  getGravity()	const;
 	float getD0()		const;
 	float getG()		const;
@@ -48,8 +48,8 @@ public:
 private:
 	
 	// volume
-	vec2  LLC;		// lower left corner
-	vec2  URC;		// upper right corner
+	vec2  LLC;	// lower left corner
+	vec2  URC;	// upper right corner
 	int   Nx, Ny;	// occupancy grids
 	float dx, dy;	// occupancy grid size (approx. to radius)
 
@@ -62,7 +62,7 @@ private:
 	int SOLVER_MODE;
 	
 	// solver control parameters
-	vec2  gravity;	// gravity (m/s^2)
+	vec2  gravity;	 	// gravity (m/s^2)
 	float d0;		// initial density  (kg/m^3)
 	float g;		// tait exp. factor (gamma)
 	float a;		// viscosity constant (alpha)
