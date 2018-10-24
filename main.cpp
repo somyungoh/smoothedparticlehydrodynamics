@@ -8,7 +8,6 @@
 *		2018 Spring, Texas A&M University
 *		Instructor - Jerry Tessendorf
 *
-*
 ****************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -39,44 +38,44 @@ using namespace std;
 SPHSolver solver;
 float aspect_ratio = (float)WIDTH / (float)HEIGHT;
 
-//		GLUI variables		//
+//	GLUI variables		//
 
-int		sph_solverType;
+int	sph_solverType;
 bool	isSimulate;
 float	time_step;
-bool	capture_screen;				// screen capture
-int		frame;
-int		particles;
+bool	capture_screen;			// screen capture
+int	frame;
+int	particles;
 string  captured_file_basename;
-int		xmouse_prev, ymouse_prev;	// mouse xy
+int	xmouse_prev, ymouse_prev;	// mouse xy
 
 // solver control parameters
-float sph_gravity;		// gravity (m/s^2)
-float sph_d0;			// initial density  (kg/m^3)
-float sph_a;			// viscosity constant
-float sph_g;			// tait exp. factor (gamma)
-float sph_B;			// pressure constant
-float sph_e;			// viscosity epsilon
-float sph_ws;			// wall stickiness for boundary condition
-float sph_h;			// radius (m)
-float sph_m;			// mass	  (kg)
+float sph_gravity;	// gravity (m/s^2)
+float sph_d0;		// initial density  (kg/m^3)
+float sph_a;		// viscosity constant
+float sph_g;		// tait exp. factor (gamma)
+float sph_B;		// pressure constant
+float sph_e;		// viscosity epsilon
+float sph_ws;		// wall stickiness for boundary condition
+float sph_h;		// radius (m)
+float sph_m;		// mass	  (kg)
 
 // glui variables
-int				main_window;
-GLUI			*glui;		
-GLUI_Panel		*panel_solverType, *panel_solverControl, *panel_description, *panel_status;
+int		main_window;
+GLUI		*glui;		
+GLUI_Panel	*panel_solverType, *panel_solverControl, *panel_description, *panel_status;
 GLUI_RadioGroup	*radio_solverType;
 GLUI_EditText	*tb_timestep, *tb_gravity, *tb_d0, *tb_a, *tb_g, *tb_B, *tb_e, *tb_ws, *tb_h, *tb_m;
 GLUI_EditText	*tb_frame, *tb_p_num;
 GLUI_StaticText *txt_blank, *txt_d0, *txt_a, *txt_g, *txt_B, *txt_e, *txt_ws, *txt_h, *txt_m;
-GLUI_Button		*button_apply, *button_run, *button_reset, *button_capture;
+GLUI_Button	*button_apply, *button_run, *button_reset, *button_capture;
 
-#define ID_PANEL_PARAMETER		100
-#define ID_RADIO_SOLVER			101
-#define ID_BUTTON_APPLY			200
-#define ID_BUTTON_RUN			201
-#define ID_BUTTON_RESET			202
-#define ID_BUTTON_CAPTURE		203
+#define ID_PANEL_PARAMETER	100
+#define ID_RADIO_SOLVER		101
+#define ID_BUTTON_APPLY		200
+#define ID_BUTTON_RUN		201
+#define ID_BUTTON_RESET		202
+#define ID_BUTTON_CAPTURE	203
 
 
 
@@ -88,7 +87,8 @@ void writeImage(const char* file_name, unsigned char * img) {
 	string out_name = dir + "/" + file_name + "." + format;		// full output name
 
 	unsigned char *out_map = new unsigned char[WIDTH * HEIGHT * 3];
-																// copy data
+
+	// copy data
 	for (int y = 0; y <HEIGHT; y++) {
 #pragma omp parallel for
 		for (int x = 0; x < WIDTH; x++) {
@@ -129,15 +129,12 @@ void apply_change() {
 //
 //----------------------------------------------------
 
-void reshape(int x, int y)
-{
+void reshape(int x, int y){
 	glViewport(0, 0, x, y);
-
 	glutPostRedisplay();
 }
 
-void cbDisplay(void)
-{
+void cbDisplay(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -152,8 +149,7 @@ void cbDisplay(void)
 	glutSwapBuffers();
 	glFlush();
 
-	if (capture_screen)
-	{
+	if (capture_screen){
 		std::stringstream os; os << frame;
 		string dispframe = os.str();
 		if (frame < 1000) { dispframe = "0" + dispframe; }
@@ -170,8 +166,7 @@ void cbDisplay(void)
 }
 
 // animate and display new result
-void cbIdle()
-{
+void cbIdle(){
 	if (glutGetWindow() != main_window)
 		glutSetWindow(main_window);
 
@@ -187,8 +182,7 @@ void cbIdle()
 	glui->sync_live();
 }
 
-void cbOnKeyboard(unsigned char key, int x, int y)
-{
+void cbOnKeyboard(unsigned char key, int x, int y){
 	switch (key)
 	{
 	case '+': case '=':
@@ -199,8 +193,7 @@ void cbOnKeyboard(unsigned char key, int x, int y)
 	}
 }
 
-void cbMouseDown(int button, int state, int x, int y)
-{
+void cbMouseDown(int button, int state, int x, int y){
 	if (button != GLUT_LEFT_BUTTON) { return; }
 	if (state != GLUT_DOWN) { return; }
 	xmouse_prev = x;
@@ -213,16 +206,14 @@ void cbMouseDown(int button, int state, int x, int y)
 	cout << "INPUT::Added Particles\n";
 }
 
-void cbMouseMove(int x, int y)
-{
+void cbMouseMove(int x, int y){
 	xmouse_prev = x;
 	ymouse_prev = y;
 }
 
 
 
-void PrintUsage()
-{
+void PrintUsage(){
 	cout << "==============================================================\n";
 	cout << "\n";
 	cout << "\t Project4 - Smooth Particle Hydrodynamics\n";
@@ -244,8 +235,8 @@ void init_components() {
 	vec2 URC	= vec2(1, (1.f / aspect_ratio));
 
 	solver		= SPHSolver(LLC, URC, INITIALPARTICLE);
-	sph_solverType = solver.getSolverMode();
-	sph_gravity = solver.getGravity().y;
+	sph_solverType 	= solver.getSolverMode();
+	sph_gravity 	= solver.getGravity().y;
 	sph_d0		= solver.getD0();
 	sph_a		= solver.getA();
 	sph_g		= solver.getG();
