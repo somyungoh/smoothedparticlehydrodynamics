@@ -26,7 +26,7 @@ public:
 	int   getID()			const;
 	vec2  getPosition()		const;
 	vec2  getVelocity()		const;
-	vec2  getAcceleration()	const;
+	vec2  getAcceleration()		const;
 	float getRadius()		const;
 	float getMass()			const;
 	float getDensity()		const;
